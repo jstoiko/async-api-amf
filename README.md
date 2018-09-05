@@ -2,25 +2,29 @@
 
 ## Files
 
-- dialect.yaml: AsyncAPI Dialect
+- asyncapi/vocabulary.yaml: AsyncAPI Vocabulary
+- asyncapi/dialect.yaml: AsyncAPI Dialect
+
+- bin/parse.sh: parse script
+- bin/validate.sh: validate script
+- lib/amf.jar: bundled version of AMF for the parse and validate script
+
 - example.yaml: AsyncAPI example
-- parse.sh: parse script
-- validate.sh: validate script
 - errors.txt: Errors found in the AsyncAPI specification
-- amf.jar: bundled version of AMF for the parse and validate script
+
 
 ## Parsing
 
 Parse the example
 
 ``` bash
-$./parse.sh example
+$./bin/parse.sh example
 ```
 
 Parse the dialect:
 
 ``` bash
-$./parse.sh dialect
+$./bin/parse.sh dialect
 ```
 
 ## Validate
@@ -28,13 +32,13 @@ $./parse.sh dialect
 Validate the example
 
 ``` bash
-$./validate.sh example
+$./bin/validate.sh example
 ```
 
 Validate the dialect:
 
 ``` bash
-$./validate.sh dialect
+$./bin/validate.sh dialect
 ```
 
 ## Differences from spec

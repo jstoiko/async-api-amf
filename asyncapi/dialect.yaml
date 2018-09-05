@@ -3,137 +3,142 @@
 dialect: AsyncAPI
 version: 1.0.0
 
+uses:
+  async: vocabulary.yaml
+
 external:
-  async: http://www.asyncapi.com/v1/spec#
+  schema-org: http://schema.org/
+  oas: https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.1#
+  json-schema: http://json-schema.org/schema#
 
 nodeMappings:
 
   AsyncAPIObject:
-    classTerm: async.API
+    classTerm: async.AsyncAPI
     mapping:
       asyncapi:
-        propertyTerm: async.specVersion
+        propertyTerm: schema-org.version
         range: string
         pattern: 1.0.0
         mandatory: true
       baseTopic:
-        propertyTerm: async.baseTopic
+        propertyTerm: async.topicTemplate
         range: string
       info:
-        propertyTerm: async.info
+        propertyTerm: oas.info
         range: InfoObject
         mandatory: true
       servers:
-        propertyTerm: async.server
+        propertyTerm: oas.server
         range: ServerObject
         allowMultiple: true
       topics:
-        propertyTerm: async.topic
+        propertyTerm: oas.topics
         range: TopicItemObject
         mandatory: true
-        mapKey: async.topicPattern
+        mapKey: async.topicTemplate
       security:
-        propertyTerm: async.securityRequirements
+        propertyTerm: oas.securityRequirements
         range: SecurityRequirementObject
         allowMultiple: true
       externalDocs:
-        propertyTerm: async.documentation
+        propertyTerm: schema-org.documentation
         range: ExternalDocumentationObject
 
   InfoObject:
-    classTerm: async.Info
+    classTerm: schema-org.CreativeWork
     mapping:
       title:
-        propertyTerm: async.title
+        propertyTerm: schema-org.name
         range: string
         mandatory: true
       version:
-        propertyTerm: async.version
+        propertyTerm: schema-org.version
         range: string
         mandatory: true
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
       termsOfService:
-        propertyTerm: async.termsOfService
+        propertyTerm: schema-org.termsOfService
         range: link
       contact:
-        propertyTerm: async.contact
+        propertyTerm: schema-org.provider
         range: ContactObject
       license:
-        propertyTerm: async.license
+        propertyTerm: schema-org.license
         range: LicenseObject
 
   ContactObject:
-    classTerm: async.Contact
+    classTerm: schema-org.Organization
     mapping:
       name:
-        propertyTerm: async.name
+        propertyTerm: schema-org.name
         range: string
       url:
-        propertyTerm: async.url
+        propertyTerm: schema-org.url
         range: link
       email:
-        propertyTerm: async.email
+        propertyTerm: schema-org.email
         range: string
         pattern: ^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$
 
   LicenseObject:
-    classTerm: async.License
+    classTerm: schema-org.License
     mapping:
       name:
-        propertyTerm: async.name
+        propertyTerm: schema-org.name
         range: string
         mandatory: true
       url:
-        propertyTerm: async.url
+        propertyTerm: schema-org.url
         range: string
 
   ServerObject:
-    classTerm: async.Server
+    classTerm: oas.Server
     mapping:
       url:
-        propertyTerm: async.urlPattern
+        propertyTerm: oas.pathTemplating
         range: string
         mandatory: true
         unique: true
       scheme:
-        propertyTerm: async.urlScheme
+        propertyTerm: oas.urlScheme
         range: string
         mandatory: true
         enum: [amqp, amqps, mqtt, mqtts, ws, wss, stomp, stomps ]
         unique: true
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
       variables:
-        propertyTerm: async.patternVars
-        range: PatternVariableObject
-        mapKey: async.variableName
+        propertyTerm: oas.templateVars
+        range: TemplateVariableObject
+        mapKey: schema-org.name
 
-  PatternVariableObject:
-    classTerm: async.PatternVariable
+  TemplateVariableObject:
+    classTerm: oas.TemplateVariable
     mapping:
       name:
-        propertyTerm: async.variableName
+        propertyTerm: schema-org.name
         range: string
         unique: true
       enum:
-        propertyTerm: async.variableValueEnum
+        propertyTerm: oas.variableValueEnum
         range: string
         allowMultiple: true
       default:
-        propertyTerm: async.variableValueDefault
+        propertyTerm: oas.variableValueDefault
         range: string
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
 
   TopicItemObject:
     classTerm: async.Topic
     mapping:
-      topicPattern:
-        propertyTerm: async.topicPattern
+      template:
+        propertyTerm: async.topicTemplate
         range: string
         mandatory: true
         unique: true
@@ -148,197 +153,197 @@ nodeMappings:
     classTerm: async.Message
     mapping:
       summary:
-        propertyTerm: async.summary
+        propertyTerm: oas.summary
         range: string
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
       payload:
-        propertyTerm: async.schema
+        propertyTerm: oas.schema
         range: SchemaObject
       tags:
-        propertyTerm: async.tag
+        propertyTerm: oas.tag
         range: TagObject
         allowMultiple: true
       externalDocs:
-        propertyTerm: async.documentation
+        propertyTerm: schema-org.documentation
         range: ExternalDocumentationObject
       headers:
-        propertyTerm: async.headers
+        propertyTerm: oas.header
         range: SchemaObject
 
   # Temporary
   SchemaObject:
-    classTerm: async.Schema
+    classTerm: json-schema.Schema
     mapping:
       type:
-        propertyTerm: async.schemaType
+        propertyTerm: json-schema.type
         range: string
         enum: [array, boolean, integer, "null", number, object, string]
         allowMultiple: true
       id:
-        propertyTerm: async.schemaId
+        propertyTerm: json-schema.id
         range: string
       "$schema":
-        propertyTerm: async.schemaSchema
+        propertyTerm: json-schema.version
         range: string
       title:
-        propertyTerm: async.schemaTitle
+        propertyTerm: schema-org.title
         range: string
       description:
-        propertyTerm: async.schemaDescription
+        propertyTerm: schema-org.description
         range: string
       default:
-        propertyTerm: async.schemaDefault
+        propertyTerm: json-schema.default
         range: any
       multipleOf:
-        propertyTerm: async.schemaMultipleOf
+        propertyTerm: json-schema.multipleOf
         range: number
       maximum:
-        propertyTerm: async.schemaMaximum
+        propertyTerm: json-schema.maximum
         range: number
       minimum:
-        propertyTerm: async.schemaMinimum
+        propertyTerm: json-schema.minimum
         range: number
       exclusiveMinimum:
-        propertyTerm: async.schemaExclusiveMinimum
+        propertyTerm: json-schema.exclusiveMinimum
         range: number
       exclusiveMaximum:
-        propertyTerm: async.schemaExclusiveMaximum
+        propertyTerm: json-schema.exclusiveMaximum
         range: number
       maxLength:
-        propertyTerm: async.schemaMaxLength
+        propertyTerm: json-schema.maxLength
         range: number
       minLength:
-        propertyTerm: async.schemaMinLength
+        propertyTerm: json-schema.minLength
         range: number
       pattern:
-        propertyTerm: async.schemaPattern
+        propertyTerm: json-schema.pattern
         range: string
       additionalItems:
-        propertyTerm: async.schemaAdditionalItems
+        propertyTerm: json-schema.additionalItems
         range: boolean
       items:
-        propertyTerm: async.schemaItems
+        propertyTerm: json-schema.items
         range: SchemaObject
         allowMultiple: true
       maxItems:
-        propertyTerm: async.schemaMaxItems
+        propertyTerm: json-schema.maxItems
         range: boolean
       minItems:
-        propertyTerm: async.schemaMinItems
+        propertyTerm: json-schema.minItems
         range: boolean
       uniqueItems:
-        propertyTerm: async.schemaUniqueItems
+        propertyTerm: json-schema.uniqueItems
         range: boolean
       maxProperties:
-        propertyTerm: async.schemaMaxProperties
+        propertyTerm: json-schema.maxProperties
         range: number
       minProperties:
-        propertyTerm: async.schemaMinProperties
+        propertyTerm: json-schema.minProperties
         range: number
       required:
-        propertyTerm: async.schemaRequired
+        propertyTerm: json-schema.required
         range: string
         allowMultiple: true
       properties:
-        propertyTerm: async.schemaProperty
+        propertyTerm: json-schema.properties
         range: SchemaObject
-        mapKey: async.propertyKey
+        mapKey: json-schema.propertyKey
       patternProperties:
-        propertyTerm: async.schemaProperty
+        propertyTerm: json-schema.patternProperties
         range: SchemaObject
-        mapKey: async.propertyKey
+        mapKey: json-schema.propertyKey
       key:
-        propertyTerm: async.schemaPropertyKey
+        propertyTerm: json-schema.propertyKey
         range: string
       items:
-        propertyTerm: async.items
+        propertyTerm: json-schema.items
         range: SchemaObject
         allowMultiple: true
       xml:
-        propertyTerm: async.xmlMapping
+        propertyTerm: oas.xmlMapping
         range: XmlObject
 
   TagObject:
-    classTerm: async.Tag
+    classTerm: oas.Tag
     mapping:
       name:
-        propertyTerm: async.name
+        propertyTerm: schema-org.name
         range: string
         mandatory: true
         unique: true
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
 
   ExternalDocumentationObject:
-    classTerm: async.ExternalDocumentation
+    classTerm: oas.ExternalDocumentation
     mapping:
       url:
-        propertyTerm: async.url
+        propertyTerm: schema-org.url
         range: link
         mandatory: true
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
 
   SecuritySchemeObject:
-    classTerm: async.SecurityScheme
+    classTerm: oas.SecurityScheme
     mapping:
       type:
-        propertyTerm: async.securitySchemeType
+        propertyTerm: oas.securitySchemeType
         range: string
         enum: [userPassword, apiKey, X509, symmetricEncryption, asymmetricEncryption, httpApiKey, http]
         mandatory: true
       description:
-        propertyTerm: async.description
+        propertyTerm: schema-org.description
         range: string
       name:
-        propertyTerm: async.name
+        propertyTerm: schema-org.name
         range: string
         mandatory: false
       in:
-        propertyTerm: async.securitySchemeTarget
+        propertyTerm: oas.securitySchemeTarget
         range: string
         mandatory: true
         enum: [user, password, apiKey, query, header, cookie, httpApiKey]
       scheme:
-        propertyTerm: async.securitySchemeTargetScheme
+        propertyTerm: oas.securitySchemeTargetScheme
         range: string
         mandatory: true
       bearerFormat:
-        propertyTerm: async.bearerFormat
+        propertyTerm: oas.bearerFormat
         range: string
 
   SecurityRequirementObject:
-    classTerm: async.SecurityRequirement
+    classTerm: oas.SecurityRequirement
     mapping:
       scheme:
-        propertyTerm: async.requiredSecurityScheme
+        propertyTerm: oas.requiredSecurityScheme
         range: SecuritySchemeObject
       scopes:
-        propertyTerm: async.securityRequirementScope
+        propertyTerm: oas.securityRequirementScope
         range: string
         allowMultiple: true
 
   XmlObject:
-    classTerm: async.XmlMapping
+    classTerm: oas.XmlMapping
     mapping:
       name:
-        propertyTerm: async.xmlName
+        propertyTerm: oas.xmlName
         range: string
       namespace:
-        propertyTerm: async.xmlNamespace
+        propertyTerm: oas.xmlNamespace
         range: string
       prefix:
-        propertyTerm: async.xmlPrefix
+        propertyTerm: oas.xmlPrefix
         range: string
       attribute:
-        propertyTerm: async.xmlAttribute
+        propertyTerm: oas.xmlAttribute
         range: string
       wrapped:
-        propertyTerm: async.xmlWrapped
+        propertyTerm: oas.xmlWrapped
         range: boolean
 
 

@@ -32,6 +32,7 @@ nodeMappings:
         propertyTerm: oas.server
         range: ServerObject
         allowMultiple: true
+        patch: upsert
       topics:
         propertyTerm: oas.topics
         range: TopicItemObject
@@ -41,6 +42,7 @@ nodeMappings:
         propertyTerm: oas.securityRequirements
         range: SecurityRequirementObject
         allowMultiple: true
+        patch: upsert
       externalDocs:
         propertyTerm: schema-org.documentation
         range: ExternalDocumentationObject
@@ -350,6 +352,16 @@ nodeMappings:
 documents:
   root:
     encodes: AsyncAPIObject
+    declares:
+      schemas: SchemaObject
+      messages: MessageObject
+      securitySchemes: SecuritySchemeObject
+  fragments:
+    encodes:
+      Schema: SchemaObject
+      Message: MessageObject
+      SecurityScheme: SecuritySchemeObject
+  library:
     declares:
       schemas: SchemaObject
       messages: MessageObject

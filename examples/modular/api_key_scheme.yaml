@@ -1,0 +1,6 @@
+#%SecurityScheme / AsyncAPI 1.0.0
+
+type: httpApiKey
+description: API Key requirement
+in: apiKey
+scheme: https

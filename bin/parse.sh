@@ -5,7 +5,7 @@ case "$1" in
         java -jar ./lib/amf.jar parse --format-in "AML 1.0" --media-type-in application/yaml file://asyncapi/dialect.yaml
         ;;
     example)
-        java -jar ./lib/amf.jar parse -ds file://asyncapi/dialect.yaml --format-in "AML 1.0" --media-type-in application/yaml example.yaml
+        java -jar ./lib/amf.jar parse -ds file://asyncapi/dialect.yaml --format-in "AML 1.0" --media-type-in application/yaml $2
         ;;
     *)
         echo $"Usage $0 {dialect|example}"

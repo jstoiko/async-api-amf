@@ -77,5 +77,4 @@ Multiple patches could be used to deploy the same API in multiple environments. 
 ## Differences from spec
 
 - security scheme requirements format is slightly different
-- declarations are not under components but directly under the top level node
 - support for JSON schema nodes has been done inline for convenience, not complete

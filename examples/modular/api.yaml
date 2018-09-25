@@ -80,7 +80,7 @@ topics:
   signup:
 
     subscribe:
-      $ref: "library.yaml#/messages/a_message"
+      $ref: "library.yaml#/components/messages/a_message"
 
     publish:
-      $ref: "library.yaml#/messages/publish_message"
+      $ref: "library.yaml#/components/messages/publish_message"

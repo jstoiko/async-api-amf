@@ -4,16 +4,17 @@ $target: api.yaml
 
 baseTopic: hitch.accounts
 
-securitySchemes:
-  api_key:
-    type: httpApiKey
-    description: API Key requirement
-    in: apiKey
-    scheme: https
+components:
+  securitySchemes:
+    api_key:
+      type: httpApiKey
+      description: API Key requirement
+      in: apiKey
+      scheme: https
 
 security:
   - scheme:
-      $ref: "#/securitySchemes/api_key"
+      $ref: "#/components/securitySchemes/api_key"
     scopes: []
 
 servers:

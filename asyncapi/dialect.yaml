@@ -366,3 +366,5 @@ documents:
       schemas: SchemaObject
       messages: MessageObject
       securitySchemes: SecuritySchemeObject
+  options:
+    declarationsPath: components

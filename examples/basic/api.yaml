@@ -4,20 +4,21 @@ asyncapi: 1.0.0
 
 baseTopic: hitch.accounts
 
-messages:
-  a_message:
-    summary: a message
+components:
+  messages:
+    a_message:
+      summary: a message
 
-securitySchemes:
-  api_key:
-    type: httpApiKey
-    description: API Key requirement
-    in: apiKey
-    scheme: https
+  securitySchemes:
+    api_key:
+      type: httpApiKey
+      description: API Key requirement
+      in: apiKey
+      scheme: https
 
 security:
   - scheme:
-      $ref: "#/securitySchemes/api_key"
+      $ref: "#/components/securitySchemes/api_key"
     scopes: []
 
 externalDocs:
@@ -91,7 +92,7 @@ topics:
   signup:
 
     subscribe:
-      $ref: "#/messages/a_message"
+      $ref: "#/components/messages/a_message"
 
     publish:
       summary: Action to sign a user up

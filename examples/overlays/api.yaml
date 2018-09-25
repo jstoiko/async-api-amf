@@ -2,9 +2,10 @@
 
 asyncapi: 1.0.0
 
-messages:
-  a_message:
-    summary: a message
+components:
+  messages:
+    a_message:
+      summary: a message
 
 
 info:
@@ -52,7 +53,7 @@ topics:
 
   signup:
     subscribe:
-      $ref: "#/messages/a_message"
+      $ref: "#/components/messages/a_message"
 
     publish:
       summary: Action to sign a user up

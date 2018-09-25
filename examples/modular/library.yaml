@@ -1,34 +1,34 @@
 #%Library / AsyncAPI 1.0.0
+components:
+  messages:
 
-messages:
+    a_message:
+      summary: a message
 
-  a_message:
-    summary: a message
-
-  publish_message:
-    summary: Action to sign a user up
-    description: A longer description
-    tags:
-      - name: user
-      - name: signup
-      - name: register
-    headers:
-      type: object
-      properties:
-        qos:
-          type: string
-        retainFlag:
-          type: string
-    payload:
-      type: object
-      properties:
-        user:
-          type: string
-          xml:
-            name: user
-            wrapped: false
-        signup:
-          type: string
-    externalDocs:
-      url: http://www.example.com/documentation#signup
-      description: documentation about the signup action
+    publish_message:
+      summary: Action to sign a user up
+      description: A longer description
+      tags:
+        - name: user
+        - name: signup
+        - name: register
+      headers:
+        type: object
+        properties:
+          qos:
+            type: string
+          retainFlag:
+            type: string
+      payload:
+        type: object
+        properties:
+          user:
+            type: string
+            xml:
+              name: user
+              wrapped: false
+          signup:
+            type: string
+      externalDocs:
+        url: http://www.example.com/documentation#signup
+        description: documentation about the signup action

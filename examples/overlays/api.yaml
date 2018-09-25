@@ -1,6 +1,6 @@
-#%AsyncAPI 1.0.0
+#%AsyncAPI 1.2.0
 
-asyncapi: 1.0.0
+asyncapi: 1.2.0
 
 components:
   messages:

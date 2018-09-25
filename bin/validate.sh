@@ -2,7 +2,7 @@
 
 case "$1" in
     dialect)
-        java -jar ./lib/amf.jar validate --format-in "AML 1.0" --media-type-in application/yaml dialect.yaml
+        java -jar ./lib/amf.jar validate --format-in "AML 1.0" --media-type-in application/yaml asyncapi/dialect.yaml
         ;;
     example)
         java -jar ./lib/amf.jar validate -ds file://asyncapi/dialect.yaml --format-in "AML 1.0" --media-type-in application/yaml $2

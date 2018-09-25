@@ -1,7 +1,7 @@
 #%Dialect 1.0
 
 dialect: AsyncAPI
-version: 1.0.0
+version: 1.2.0
 
 uses:
   async: vocabulary.yaml
@@ -19,7 +19,7 @@ nodeMappings:
       asyncapi:
         propertyTerm: schema-org.version
         range: string
-        pattern: 1.0.0
+        pattern: 1.2.0
         mandatory: true
       baseTopic:
         propertyTerm: async.topicTemplate
@@ -34,10 +34,18 @@ nodeMappings:
         allowMultiple: true
         patch: upsert
       topics:
-        propertyTerm: oas.topics
+        propertyTerm: async.topics
         range: TopicItemObject
-        mandatory: true
+        mandatory: false
         mapKey: async.topicTemplate
+      stream:
+        propertyTerm: async.stream
+        range: StreamObject
+        mandatory: false
+      events:
+        propertyTerm: async.events
+        range: EventsObject
+        mandatory: false
       security:
         propertyTerm: oas.securityRequirements
         range: SecurityRequirementObject
@@ -108,7 +116,7 @@ nodeMappings:
         propertyTerm: oas.urlScheme
         range: string
         mandatory: true
-        enum: [amqp, amqps, mqtt, mqtts, ws, wss, stomp, stomps ]
+        enum: [amqp, amqps, mqtt, mqtts, ws, wss, stomp, stomps, https, http ]
         unique: true
       description:
         propertyTerm: schema-org.description
@@ -150,6 +158,47 @@ nodeMappings:
       publish:
         propertyTerm: async.publish
         range: MessageObject
+
+  StreamObject:
+    classTerm: async.Stream
+    mapping:
+      framing:
+        propertyTerm: async.framing
+        range: StreamFramingObject
+        mandatory: true
+      read:
+        propertyTerm: async.subscribe
+        range: MessageObject
+        allowMultiple: true
+      write:
+        propertyTerm: async.publish
+        range: MessageObject
+        allowMultiple: true
+
+  StreamFramingObject:
+    classTerm: async.MessageFrame
+    mapping:
+      type:
+        propertyTerm: async.framingType
+        mandatory: true
+        range: string
+        enum: [chunked, sse]
+      delimiter:
+        propertyTerm: async.framingDelimiter
+        range: string
+        enum: ["\n\r", "\n"]
+
+  EventsObject:
+    classTerm: schema-org.ServiceChannel
+    mapping:
+      receive:
+        propertyTerm: async.subscribe
+        range: MessageObject
+        allowMultiple: true
+      send:
+        propertyTerm: async.publish
+        range: MessageObject
+        allowMultiple: true
 
   MessageObject:
     classTerm: async.Message

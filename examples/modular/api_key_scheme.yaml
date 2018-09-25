@@ -1,4 +1,4 @@
-#%SecurityScheme / AsyncAPI 1.0.0
+#%SecurityScheme / AsyncAPI 1.2.0
 
 type: httpApiKey
 description: API Key requirement
